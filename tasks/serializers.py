@@ -5,6 +5,9 @@ from  auth_users.serializers import AuthUserModelSerializer
 from  auth_users.models import AuthUser
 from  rates.serializers import RateModelSerializer
 from  rates.models import Rate
+from django.core.mail import EmailMessage
+
+
 
 # Serializers define the API representation.
 class TaskModelSerializer(serializers.ModelSerializer):
@@ -12,13 +15,15 @@ class TaskModelSerializer(serializers.ModelSerializer):
     rate = RateModelSerializer(read_only=True)
     class Meta:
         model = Task
-        fields = ['id', 'user', 'rate', 'active']
-    
+        fields = ['id', 'user', 'rate', 'hour','active']
+
+        
     def create(self, validated_data):
+        print(validated_data)
         task = Task(
-            user_id=validated_data['user'],
-            rate_id=validated_data['rate'],
+            user_id=1,
+            rate_id=1,
+            hour=validated_data['hour'],
             active=validated_data['active'],
         )
-        task.save()
         return task

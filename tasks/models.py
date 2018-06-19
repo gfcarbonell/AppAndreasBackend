@@ -4,6 +4,9 @@ from django.template.defaultfilters import slugify
 import datetime
 from rates.models import Rate 
 from auth_users.models import AuthUser 
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+
 
 # Create your models here.
 class Task(models.Model):
@@ -22,6 +25,14 @@ class Task(models.Model):
         db_index=True,
         on_delete=models.CASCADE,
         help_text='Menu | Menú'
+    )
+    hour = models.PositiveSmallIntegerField(
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(1000),
+        ], 
+        default=0,
+        help_text='Hour(s) | Hora(s)'
     )
     active = models.BooleanField(
         default=True,
@@ -47,7 +58,8 @@ class Task(models.Model):
         super(Task, self).save(*args, **kwargs)
 
     def get_name(self):
-        return '%s - %s - %s' %(self.user.username, self.rate.get_name(), self.scheduled_date)
+        dateTime = datetime.datetime.now()
+        return '%s - %s - %s' %(self.user.username, self.rate.get_name(), dateTime)
 
     class Meta:
         db_table = 'task'
