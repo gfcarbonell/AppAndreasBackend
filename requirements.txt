@@ -1,0 +1,17 @@
+Babel==2.6.0
+certifi==2018.4.16
+chardet==3.0.4
+Django==1.11
+django-cors-headers==2.2.0
+django-filter==1.1.0
+django-phonenumber-field==2.0.0
+django-preventconcurrentlogins==0.8.2
+django-url-or-relative-url-field==0.1.1
+djangorestframework==3.8.2
+idna==2.6
+phonenumberslite==8.9.7
+Pillow==5.1.0
+psycopg2==2.7.4
+pytz==2018.4
+requests==2.18.4
+urllib3==1.22
